@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "NjGJRSDR/bKC4bnWVxLZ46mX/+X46iOr8XvIdmALcN4KML0+Jn+2ayclpzIbCJmfLmrRi4LGWInEJKhFYaxMfA==",
+  "success": true,
+  "projectFilePath": "C:\\Aniket Asus\\Markdown_to_html\\Markdown_to_html.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ajha2\\.nuget\\packages\\markdig\\0.36.2\\markdig.0.36.2.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,114 @@
+{
+  "version": 3,
+  "targets": {
+    "net7.0": {
+      "Markdig/0.36.2": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Markdig.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Markdig.dll": {
+            "related": ".xml"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Markdig/0.36.2": {
+      "sha512": "jQoU7pIDSGBuorR6mxAmGPXAiTmG1/1bSzuXsL7DfmDe/ueokSld5abE0M+lYHI7IeKs/HvkhRnKl0Gt9MF5cw==",
+      "type": "package",
+      "path": "markdig/0.36.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net462/Markdig.dll",
+        "lib/net462/Markdig.xml",
+        "lib/net6.0/Markdig.dll",
+        "lib/net6.0/Markdig.xml",
+        "lib/net8.0/Markdig.dll",
+        "lib/net8.0/Markdig.xml",
+        "lib/netstandard2.0/Markdig.dll",
+        "lib/netstandard2.0/Markdig.xml",
+        "lib/netstandard2.1/Markdig.dll",
+        "lib/netstandard2.1/Markdig.xml",
+        "markdig.0.36.2.nupkg.sha512",
+        "markdig.nuspec",
+        "markdig.png",
+        "readme.md"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net7.0": [
+      "Markdig >= 0.36.2"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\ajha2\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Aniket Asus\\Markdown_to_html\\Markdown_to_html.csproj",
+      "projectName": "Markdown_to_html",
+      "projectPath": "C:\\Aniket Asus\\Markdown_to_html\\Markdown_to_html.csproj",
+      "packagesPath": "C:\\Users\\ajha2\\.nuget\\packages\\",
+      "outputPath": "C:\\Aniket Asus\\Markdown_to_html\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\ajha2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net7.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net7.0": {
+        "targetAlias": "net7.0",
+        "dependencies": {
+          "Markdig": {
+            "target": "Package",
+            "version": "[0.36.2, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

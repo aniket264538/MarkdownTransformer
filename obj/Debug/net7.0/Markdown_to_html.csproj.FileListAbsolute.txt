@@ -1,0 +1,17 @@
+C:\Aniket Asus\Markdown_to_html\bin\Debug\net7.0\Markdown_to_html.exe
+C:\Aniket Asus\Markdown_to_html\bin\Debug\net7.0\Markdown_to_html.deps.json
+C:\Aniket Asus\Markdown_to_html\bin\Debug\net7.0\Markdown_to_html.runtimeconfig.json
+C:\Aniket Asus\Markdown_to_html\bin\Debug\net7.0\Markdown_to_html.dll
+C:\Aniket Asus\Markdown_to_html\bin\Debug\net7.0\Markdown_to_html.pdb
+C:\Aniket Asus\Markdown_to_html\bin\Debug\net7.0\Markdig.dll
+C:\Aniket Asus\Markdown_to_html\obj\Debug\net7.0\Markdown_to_html.csproj.AssemblyReference.cache
+C:\Aniket Asus\Markdown_to_html\obj\Debug\net7.0\Markdown_to_html.GeneratedMSBuildEditorConfig.editorconfig
+C:\Aniket Asus\Markdown_to_html\obj\Debug\net7.0\Markdown_to_html.AssemblyInfoInputs.cache
+C:\Aniket Asus\Markdown_to_html\obj\Debug\net7.0\Markdown_to_html.AssemblyInfo.cs
+C:\Aniket Asus\Markdown_to_html\obj\Debug\net7.0\Markdown_to_html.csproj.CoreCompileInputs.cache
+C:\Aniket Asus\Markdown_to_html\obj\Debug\net7.0\Markdown_to_html.csproj.CopyComplete
+C:\Aniket Asus\Markdown_to_html\obj\Debug\net7.0\Markdown_to_html.dll
+C:\Aniket Asus\Markdown_to_html\obj\Debug\net7.0\refint\Markdown_to_html.dll
+C:\Aniket Asus\Markdown_to_html\obj\Debug\net7.0\Markdown_to_html.pdb
+C:\Aniket Asus\Markdown_to_html\obj\Debug\net7.0\Markdown_to_html.genruntimeconfig.cache
+C:\Aniket Asus\Markdown_to_html\obj\Debug\net7.0\ref\Markdown_to_html.dll

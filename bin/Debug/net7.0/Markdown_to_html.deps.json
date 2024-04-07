@@ -1,0 +1,41 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "Markdown_to_html/1.0.0": {
+        "dependencies": {
+          "Markdig": "0.36.2"
+        },
+        "runtime": {
+          "Markdown_to_html.dll": {}
+        }
+      },
+      "Markdig/0.36.2": {
+        "runtime": {
+          "lib/net6.0/Markdig.dll": {
+            "assemblyVersion": "0.36.0.0",
+            "fileVersion": "0.36.2.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Markdown_to_html/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Markdig/0.36.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jQoU7pIDSGBuorR6mxAmGPXAiTmG1/1bSzuXsL7DfmDe/ueokSld5abE0M+lYHI7IeKs/HvkhRnKl0Gt9MF5cw==",
+      "path": "markdig/0.36.2",
+      "hashPath": "markdig.0.36.2.nupkg.sha512"
+    }
+  }
+}

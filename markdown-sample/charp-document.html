@@ -1,0 +1,470 @@
+<hr />
+<h2 id="title-introduction-to-razor-pages-in-asp.net-core-author-tdykstra-description-explains-how-razor-pages-in-asp.net-core-makes-coding-page-focused-scenarios-easier-and-more-productive-than-using-mvc.monikerrange-aspnetcore-3.1-ms.author-riande-ms.date-08282023-uid-razor-pagesindex">title: Introduction to Razor Pages in ASP.NET Core
+author: tdykstra
+description: Explains how Razor Pages in ASP.NET Core makes coding page-focused scenarios easier and more productive than using MVC.
+monikerRange: '&gt;= aspnetcore-3.1'
+ms.author: riande
+ms.date: 08/28/2023
+uid: razor-pages/index</h2>
+<h1 id="introduction-to-razor-pages-in-asp.net-core">Introduction to Razor Pages in ASP.NET Core</h1>
+<p>By <a href="https://twitter.com/RickAndMSFT">Rick Anderson</a>, <a href="https://twitter.com/daveabrock">Dave Brock</a>, and <a href="https://twitter.com/serpent5">Kirk Larkin</a></p>
+<p>[!INCLUDE<a href="%7E/includes/not-latest-version.md"></a>]</p>
+<p>Razor Pages can make coding page-focused scenarios easier and more productive than using controllers and views.</p>
+<p>If you're looking for a tutorial that uses the Model-View-Controller approach, see <a href="xref:tutorials/first-mvc-app/start-mvc">Get started with ASP.NET Core MVC</a>.</p>
+<p>This document provides an introduction to Razor Pages. It's not a step by step tutorial. If you find some of the sections too advanced, see <a href="xref:tutorials/razor-pages/razor-pages-start">Get started with Razor Pages</a>. For an overview of ASP.NET Core, see the <a href="xref:index">Introduction to ASP.NET Core</a>.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<div class="moniker"><h1 id="visual-studio"><a href="#tab/visual-studio">Visual Studio</a></h1>
+<p>[!INCLUDE<a href="%7E/includes/net-prereqs-vs-6.0.md"></a>]</p>
+<h1 id="visual-studio-code"><a href="#tab/visual-studio-code">Visual Studio Code</a></h1>
+<p>[!INCLUDE<a href="%7E/includes/net-prereqs-vsc-6.0.md"></a>]</p>
+<h1 id="visual-studio-for-mac"><a href="#tab/visual-studio-mac">Visual Studio for Mac</a></h1>
+<p>[!INCLUDE<a href="%7E/includes/net-prereqs-mac-6.0.md"></a>]</p>
+<hr />
+<p><a name="rpvs17"></a></p>
+<h2 id="create-a-razor-pages-project">Create a Razor Pages project</h2>
+<h1 id="visual-studio-1"><a href="#tab/visual-studio">Visual Studio</a></h1>
+<p>See <a href="xref:tutorials/razor-pages/razor-pages-start">Get started with Razor Pages</a> for detailed instructions on how to create a Razor Pages project.</p>
+<h1 id="visual-studio-code-1"><a href="#tab/visual-studio-code">Visual Studio Code</a></h1>
+<p>Run <code>dotnet new webapp</code> from the command line.</p>
+<h1 id="visual-studio-for-mac-1"><a href="#tab/visual-studio-mac">Visual Studio for Mac</a></h1>
+<p>See <a href="xref:tutorials/razor-pages/razor-pages-start">Get started with Razor Pages</a> for detailed instructions on how to create a Razor Pages project.</p>
+<hr />
+<h2 id="razor-pages">Razor Pages</h2>
+<p>Razor Pages is enabled in <code>Program.cs</code>:</p>
+<p>[!code-csharp<a href="%7E/razor-pages/index/6.0sample/RazorPagesIntro/Program.cs?highlight=3,20"></a>]</p>
+<p>In the preceding code:</p>
+<ul>
+<li><a href="xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages%2A">xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages%2A</a> adds services for Razor Pages to the app.</li>
+<li><a href="xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages%2A">xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages%2A</a> adds endpoints for Razor Pages to the <a href="xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder">xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder</a>.</li>
+</ul>
+<p>Consider a basic page:
+<a name="OnGet"></a></p>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/6.0sample/RazorPagesIntro/Pages/Index.cshtml?highlight=1"></a>]</p>
+<p>The preceding code looks a lot like a <a href="xref:tutorials/first-mvc-app/adding-view">Razor view file</a> used in an ASP.NET Core app with controllers and views. What makes it different is the <a href="xref:mvc/views/razor#page"><code>@page</code></a> directive. <code>@page</code> makes the file into an MVC action, which means that it handles requests directly, without going through a controller. <code>@page</code> must be the first Razor directive on a page. <code>@page</code> affects the behavior of other <a href="xref:mvc/views/razor">Razor</a> constructs. Razor Pages file names have a <code>.cshtml</code> suffix.</p>
+<p>A similar page, using a <code>PageModel</code> class, is shown in the following two files. The <code>Pages/Index2.cshtml</code> file:</p>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/6.0sample/RazorPagesIntro/Pages/Index2.cshtml"></a>]</p>
+<p>The <code>Pages/Index2.cshtml.cs</code> page model:</p>
+<p>[!code-csharp<a href="%7E/razor-pages/index/6.0sample/RazorPagesIntro/Pages/Index2.cshtml.cs"></a>]</p>
+<p>By convention, the <code>PageModel</code> class file has the same name as the Razor Page file with <code>.cs</code> appended. For example, the previous Razor Page is <code>Pages/Index2.cshtml</code>. The file containing the <code>PageModel</code> class is named <code>Pages/Index2.cshtml.cs</code>.</p>
+<p>The associations of URL paths to pages are determined by the page's location in the file system. The following table shows a Razor Page path and the matching URL:</p>
+<table>
+<thead>
+<tr>
+<th>File name and path</th>
+<th>matching URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/Pages/Index.cshtml</code></td>
+<td><code>/</code> or <code>/Index</code></td>
+</tr>
+<tr>
+<td><code>/Pages/Contact.cshtml</code></td>
+<td><code>/Contact</code></td>
+</tr>
+<tr>
+<td><code>/Pages/Store/Contact.cshtml</code></td>
+<td><code>/Store/Contact</code></td>
+</tr>
+<tr>
+<td><code>/Pages/Store/Index.cshtml</code></td>
+<td><code>/Store</code> or <code>/Store/Index</code></td>
+</tr>
+</tbody>
+</table>
+<p>Notes:</p>
+<ul>
+<li>The runtime looks for Razor Pages files in the <em>Pages</em> folder by default.</li>
+<li><code>Index</code> is the default page when a URL doesn't include a page.</li>
+</ul>
+<h2 id="write-a-basic-form">Write a basic form</h2>
+<p>Razor Pages is designed to make common patterns used with web browsers easy to implement when building an app. <a href="xref:mvc/models/model-binding">Model binding</a>, <a href="xref:mvc/views/tag-helpers/intro">Tag Helpers</a>, and HTML helpers work with the properties defined in a Razor Page class. Consider a page that implements a basic &quot;contact us&quot; form for the <code>Contact</code> model:</p>
+<p>For the samples in this document, the <code>DbContext</code> is initialized in the <a href="https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/razor-pages/index/6.0sample/RazorPagesContacts/Program.cs#L11-L12">Program.cs</a> file.</p>
+<p>The in memory database requires the <code>Microsoft.EntityFrameworkCore.InMemory</code> NuGet package.</p>
+<p>[!code-csharp<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Program.cs?name=snippet1&amp;highlight=7-8"></a>]</p>
+<p>The data model:</p>
+<p>[!code-csharp<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Models/Customer.cs"></a>]</p>
+<p>The db context:</p>
+<p>[!code-csharp<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Data/CustomerDbContext.cs?name=snippet"></a>]</p>
+<p>The <code>Pages/Customers/Create.cshtml</code> view file:</p>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml"></a>]</p>
+<p>The <code>Pages/Customers/Create.cshtml.cs</code> page model:</p>
+<p>[!code-csharp<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_PageModel"></a>]</p>
+<p>By convention, the <code>PageModel</code> class is called <code>&lt;PageName&gt;Model</code> and is in the same namespace as the page.</p>
+<p>The <code>PageModel</code> class allows separation of the logic of a page from its presentation. It defines page handlers for requests sent to the page and the data used to render the page. This separation allows:</p>
+<ul>
+<li>Managing of page dependencies through <a href="xref:fundamentals/dependency-injection">dependency injection</a>.</li>
+<li><a href="xref:test/razor-pages-tests">Unit testing</a></li>
+</ul>
+<p>The page has an <code>OnPostAsync</code> <em>handler method</em>, which runs on <code>POST</code> requests (when a user posts the form). Handler methods for any HTTP verb can be added. The most common handlers are:</p>
+<ul>
+<li><code>OnGet</code> to initialize state needed for the page. In the preceding code, the <code>OnGet</code> method displays the <code>CreateModel.cshtml</code> Razor Page.</li>
+<li><code>OnPost</code> to handle form submissions.</li>
+</ul>
+<p>The <code>Async</code> naming suffix is optional but is often used by convention for asynchronous functions. The preceding code is typical for Razor Pages.</p>
+<p>If you're familiar with ASP.NET apps using controllers and views:</p>
+<ul>
+<li>The <code>OnPostAsync</code> code in the preceding example looks similar to typical controller code.</li>
+<li>Most of the MVC primitives like <a href="xref:mvc/models/model-binding">model binding</a>, <a href="xref:mvc/models/validation">validation</a>, and action results work the same with Controllers and Razor Pages.</li>
+</ul>
+<p>The previous <code>OnPostAsync</code> method:</p>
+<p>[!code-csharp<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_OnPostAsync"></a>]</p>
+<p>The basic flow of <code>OnPostAsync</code>:</p>
+<p>Check for validation errors.</p>
+<ul>
+<li>If there are no errors, save the data and redirect.</li>
+<li>If there are errors, show the page again with validation messages. In many cases, validation errors would be detected on the client, and never submitted to the server.</li>
+</ul>
+<p>The <code>Pages/Customers/Create.cshtml</code> view file:</p>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml"></a>]</p>
+<p>The rendered HTML from <code>Pages/Customers/Create.cshtml</code>:</p>
+<p>[!code-html<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Create4.html"></a>]</p>
+<p>In the previous code, posting the form:</p>
+<ul>
+<li><p>With valid data:</p>
+<ul>
+<li><p>The <code>OnPostAsync</code> handler method calls the <a href="xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.RedirectToPage%2A">xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.RedirectToPage%2A</a> helper method. <code>RedirectToPage</code> returns an instance of <a href="xref:Microsoft.AspNetCore.Mvc.RedirectToPageResult">xref:Microsoft.AspNetCore.Mvc.RedirectToPageResult</a>. <code>RedirectToPage</code>:</p>
+<ul>
+<li>Is an action result.</li>
+<li>Is similar to <code>RedirectToAction</code> or <code>RedirectToRoute</code> (used in controllers and views).</li>
+<li>Is customized for pages. In the preceding sample, it redirects to the root Index page (<code>/Index</code>). <code>RedirectToPage</code> is detailed in the <a href="#url_gen">URL generation for Pages</a> section.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>With validation errors that are passed to the server:</p>
+<ul>
+<li>The <code>OnPostAsync</code> handler method calls the <a href="xref:Microsoft.AspNetCore.Mvc.RazorPages.PageBase.Page%2A">xref:Microsoft.AspNetCore.Mvc.RazorPages.PageBase.Page%2A</a> helper method. <code>Page</code> returns an instance of <a href="xref:Microsoft.AspNetCore.Mvc.RazorPages.PageResult">xref:Microsoft.AspNetCore.Mvc.RazorPages.PageResult</a>. Returning <code>Page</code> is similar to how actions in controllers return <code>View</code>. <code>PageResult</code> is the default return type for a handler method. A handler method that returns <code>void</code> renders the page.</li>
+<li>In the preceding example, posting the form with no value results in <a href="xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid">ModelState.IsValid</a> returning false. In this sample, no validation errors are displayed on the client. Validation error handling is covered later in this document.</li>
+</ul>
+<p>[!code-csharp<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_OnPostAsync&amp;highlight=6-9"></a>]</p>
+</li>
+<li><p>With validation errors detected by client side validation:</p>
+<ul>
+<li>Data is <strong>not</strong> posted to the server.</li>
+<li>Client-side validation is explained later in this document.</li>
+</ul>
+</li>
+</ul>
+<p>The <code>Customer</code> property uses <a href="xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute"><code>[BindProperty]</code></a> attribute to opt in to model binding:</p>
+<p>[!code-csharp<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_OnPostAsync&amp;highlight=1-2"></a>]</p>
+<p><code>[BindProperty]</code> should <strong>not</strong> be used on models containing properties that should not be changed by the client. For more information, see <a href="xref:data/ef-rp/crud#overposting">Overposting</a>.</p>
+<p>Razor Pages, by default, bind properties only with non-<code>GET</code> verbs. Binding to properties removes the need to writing code to convert HTTP data to the model type. Binding reduces code by using the same property to render form fields (<code>&lt;input asp-for=&quot;Customer.Name&quot;&gt;</code>) and accept the input.</p>
+<p>[!INCLUDE<a href="%7E/includes/bind-get.md"></a>]</p>
+<p>Reviewing the <code>Pages/Customers/Create.cshtml</code> view file:</p>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml?highlight=3,9"></a>]</p>
+<ul>
+<li>In the preceding code, the <a href="xref:mvc/views/working-with-forms#the-input-tag-helper">input tag helper</a> <code>&lt;input asp-for=&quot;Customer.Name&quot; /&gt;</code> binds the HTML <code>&lt;input&gt;</code> element to the <code>Customer.Name</code> model expression.</li>
+<li><a href="xref:mvc/views/tag-helpers/intro#addtaghelper-makes-tag-helpers-available"><code>@addTagHelper</code></a> makes Tag Helpers available.</li>
+</ul>
+<h3 id="the-home-page">The home page</h3>
+<p><code>Index.cshtml</code> is the home page:</p>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml"></a>]</p>
+<p>The associated <code>PageModel</code> class (<code>Index.cshtml.cs</code>):</p>
+<p>[!code-csharp<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml.cs?name=snippet"></a>]</p>
+<p>The <code>Index.cshtml</code> file contains the following markup:</p>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml?name=snippet_Edit"></a>]</p>
+<p>The <code>&lt;a /a&gt;</code> <a href="xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper">Anchor Tag Helper</a> used the <code>asp-route-{value}</code> attribute to generate a link to the Edit page. The link contains route data with the contact ID. For example, <code>https://localhost:5001/Edit/1</code>. <a href="xref:mvc/views/tag-helpers/intro">Tag Helpers</a> enable server-side code to participate in creating and rendering HTML elements in Razor files.</p>
+<p>The <code>Index.cshtml</code> file contains markup to create a delete button for each customer contact:</p>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml?name=snippet_Delete"></a>]</p>
+<p>The rendered HTML:</p>
+<pre><code class="language-html">&lt;button type=&quot;submit&quot; formaction=&quot;/Customers?id=1&amp;amp;handler=delete&quot;&gt;delete&lt;/button&gt;
+</code></pre>
+<p>When the delete button is rendered in HTML, its <a href="https://developer.mozilla.org/docs/Web/HTML/Element/button#attr-formaction">formaction</a> includes parameters for:</p>
+<ul>
+<li>The customer contact ID, specified by the <code>asp-route-id</code> attribute.</li>
+<li>The <code>handler</code>, specified by the <code>asp-page-handler</code> attribute.</li>
+</ul>
+<p>When the button is selected, a form <code>POST</code> request is sent to the server. By convention, the name of the handler method is selected based on the value of the <code>handler</code> parameter according to the scheme <code>OnPost[handler]Async</code>.</p>
+<p>Because the <code>handler</code> is <code>delete</code> in this example, the <code>OnPostDeleteAsync</code> handler method is used to process the <code>POST</code> request. If the <code>asp-page-handler</code> is set to a different value, such as <code>remove</code>, a handler method with the name <code>OnPostRemoveAsync</code> is selected.</p>
+<p>[!code-csharp<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml.cs?name=snippet2"></a>]</p>
+<p>The <code>OnPostDeleteAsync</code> method:</p>
+<ul>
+<li>Gets the <code>id</code> from the query string.</li>
+<li>Queries the database for the customer contact with <code>FindAsync</code>.</li>
+<li>If the customer contact is found, it's removed and the database is updated.</li>
+<li>Calls <a href="xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.RedirectToPage%2A">xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.RedirectToPage%2A</a> to redirect to the root Index page (<code>/Index</code>).</li>
+</ul>
+<h3 id="the-edit.cshtml-file">The Edit.cshtml file</h3>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Edit.cshtml?highlight=1"></a>]</p>
+<p>The first line contains the <code>@page &quot;{id:int}&quot;</code> directive. The routing constraint <code>&quot;{id:int}&quot;</code> tells the page to accept requests to the page that contain <code>int</code> route data. If a request to the page doesn't contain route data that can be converted to an <code>int</code>, the runtime returns an HTTP 404 (not found) error. To make the ID optional, append <code>?</code> to the route constraint:</p>
+<pre><code class="language-cshtml">@page &quot;{id:int?}&quot;
+</code></pre>
+<p>The <code>Edit.cshtml.cs</code> file:</p>
+<p>[!code-csharp<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Edit.cshtml.cs?name=snippet"></a>]</p>
+<h2 id="validation">Validation</h2>
+<p>Validation rules:</p>
+<ul>
+<li>Are declaratively specified in the model class.</li>
+<li>Are enforced everywhere in the app.</li>
+</ul>
+<p>The <a href="xref:System.ComponentModel.DataAnnotations">xref:System.ComponentModel.DataAnnotations</a> namespace provides a set of built-in validation attributes that are applied declaratively to a class or property. DataAnnotations also contains formatting attributes like <a href="xref:System.ComponentModel.DataAnnotations.DataTypeAttribute"><code>[DataType]</code></a> that help with formatting and don't provide any validation.</p>
+<p>Consider the <code>Customer</code> model:</p>
+<p>[!code-csharp<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Models/Customer.cs"></a>]</p>
+<p>Using the following <code>Create.cshtml</code> view file:</p>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Create3.cshtml?highlight=3,8-9,15-99"></a>]</p>
+<p>The preceding code:</p>
+<ul>
+<li><p>Includes jQuery and jQuery validation scripts.</p>
+</li>
+<li><p>Uses the <code>&lt;div /&gt;</code> and <code>&lt;span /&gt;</code> <a href="xref:mvc/views/tag-helpers/intro">Tag Helpers</a> to enable:</p>
+<ul>
+<li>Client-side validation.</li>
+<li>Validation error rendering.</li>
+</ul>
+</li>
+<li><p>Generates the following HTML:</p>
+<p>[!code-html<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Create5.html"></a>]</p>
+</li>
+</ul>
+<p>Posting the Create form without a name value displays the error message &quot;The Name field is required.&quot; on the form. If JavaScript is enabled on the client, the browser displays the error without posting to the server.</p>
+<p>The <code>[StringLength(10)]</code> attribute generates <code>data-val-length-max=&quot;10&quot;</code> on the rendered HTML. <code>data-val-length-max</code> prevents browsers from entering more than the maximum length specified. If a tool such as <a href="https://www.telerik.com/fiddler">Fiddler</a> is used to edit and replay the post:</p>
+<ul>
+<li>With the name longer than 10.</li>
+<li>The error message &quot;The field Name must be a string with a maximum length of 10.&quot; is returned.</li>
+</ul>
+<p>Consider the following <code>Movie</code> model:</p>
+<p>[!code-csharp<a href="%7E/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDA.cs?name=snippet1"></a>]</p>
+<p>The validation attributes specify behavior to enforce on the model properties they're applied to:</p>
+<ul>
+<li><p>The <code>Required</code> and <code>MinimumLength</code> attributes indicate that a property must have a value, but nothing prevents a user from entering white space to satisfy this validation.</p>
+</li>
+<li><p>The <code>RegularExpression</code> attribute is used to limit what characters can be input. In the preceding code, &quot;Genre&quot;:</p>
+<ul>
+<li>Must only use letters.</li>
+<li>The first letter is required to be uppercase. White space, numbers, and special
+characters are not allowed.</li>
+</ul>
+</li>
+<li><p>The <code>RegularExpression</code> &quot;Rating&quot;:</p>
+<ul>
+<li>Requires that the first character be an uppercase letter.</li>
+<li>Allows special characters and numbers in subsequent spaces. &quot;PG-13&quot; is valid for a rating, but fails for a &quot;Genre&quot;.</li>
+</ul>
+</li>
+<li><p>The <code>Range</code> attribute constrains a value to within a specified range.</p>
+</li>
+<li><p>The <code>StringLength</code> attribute sets the maximum length of a string property, and optionally its minimum length.</p>
+</li>
+<li><p>Value types (such as <code>decimal</code>, <code>int</code>, <code>float</code>, <code>DateTime</code>) are inherently required and don't need the <code>[Required]</code> attribute.</p>
+</li>
+</ul>
+<p>The Create page for the <code>Movie</code> model shows displays errors with invalid values:</p>
+<p><img src="%7E/tutorials/razor-pages/validation/_static/val.png" alt="Movie view form with multiple jQuery client-side validation errors" /></p>
+<p>For more information, see:</p>
+<ul>
+<li><a href="xref:tutorials/razor-pages/validation">Add validation to the Movie app</a></li>
+<li><a href="xref:mvc/models/validation">Model validation in ASP.NET Core</a>.</li>
+</ul>
+<h2 id="css-isolation">CSS isolation</h2>
+<p>[!INCLUDE<a href="%7E/includes/css-isolation.md"></a>]</p>
+<h2 id="handle-head-requests-with-an-onget-handler-fallback">Handle HEAD requests with an OnGet handler fallback</h2>
+<p><code>HEAD</code> requests allow retrieving the headers for a specific resource. Unlike <code>GET</code> requests, <code>HEAD</code> requests don't return a response body.</p>
+<p>Ordinarily, an <code>OnHead</code> handler is created and called for <code>HEAD</code> requests:</p>
+<p>[!code-csharp<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Privacy.cshtml.cs?name=snippet"></a>]</p>
+<p>Razor Pages falls back to calling the <code>OnGet</code> handler if no <code>OnHead</code> handler is defined.</p>
+<p><a name="xsrf"></a></p>
+<h2 id="xsrfcsrf-and-razor-pages">XSRF/CSRF and Razor Pages</h2>
+<p>Razor Pages are protected by <a href="xref:security/anti-request-forgery">Antiforgery validation</a>. The <a href="xref:mvc/views/working-with-forms#the-form-tag-helper">FormTagHelper</a> injects antiforgery tokens into HTML form elements.</p>
+<p><a name="layout"></a></p>
+<h2 id="using-layouts-partials-templates-and-tag-helpers-with-razor-pages">Using Layouts, partials, templates, and Tag Helpers with Razor Pages</h2>
+<p>Pages work with all the capabilities of the Razor view engine. Layouts, partials, templates, Tag Helpers, <code>_ViewStart.cshtml</code>, and <code>_ViewImports.cshtml</code> work in the same way they do for conventional Razor views.</p>
+<p>Let's declutter this page by taking advantage of some of those capabilities.</p>
+<p>Add a <a href="xref:mvc/views/layout">layout page</a> to <code>Pages/Shared/_Layout.cshtml</code>:</p>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Shared/_Layout2.cshtml?highlight=12"></a>]</p>
+<p>The <a href="xref:mvc/views/layout">Layout</a>:</p>
+<ul>
+<li>Controls the layout of each page (unless the page opts out of layout).</li>
+<li>Imports HTML structures such as JavaScript and stylesheets.</li>
+<li>The contents of the Razor page are rendered where <code>@RenderBody()</code> is called.</li>
+</ul>
+<p>For more information, see <a href="xref:mvc/views/layout">layout page</a>.</p>
+<p>The <a href="xref:mvc/views/layout#specifying-a-layout">Layout</a> property is set in <code>Pages/_ViewStart.cshtml</code>:</p>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/sample/RazorPagesContacts2/Pages/_ViewStart.cshtml"></a>]</p>
+<p>The layout is in the <em>Pages/Shared</em> folder. Pages look for other views (layouts, templates, partials) hierarchically, starting in the same folder as the current page. A layout in the <em>Pages/Shared</em> folder can be used from any Razor page under the <em>Pages</em> folder.</p>
+<p>The layout file should go in the <em>Pages/Shared</em> folder.</p>
+<p>We recommend you <strong>not</strong> put the layout file in the <em>Views/Shared</em> folder. <em>Views/Shared</em> is an MVC views pattern. Razor Pages are meant to rely on folder hierarchy, not path conventions.</p>
+<p>View search from a Razor Page includes the <em>Pages</em> folder. The layouts, templates, and partials used with MVC controllers and conventional Razor views <em>just work</em>.</p>
+<p>Add a <code>Pages/_ViewImports.cshtml</code> file:</p>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/sample/RazorPagesContacts2/Pages/_ViewImports.cshtml"></a>]</p>
+<p><code>@namespace</code> is explained later in the tutorial. The <code>@addTagHelper</code> directive brings in the <a href="xref:mvc/views/tag-helpers/builtin-th/Index">built-in Tag Helpers</a> to all the pages in the <em>Pages</em> folder.</p>
+<p><a name="namespace"></a></p>
+<p>The <code>@namespace</code> directive set on a page:</p>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/sample/RazorPagesIntro/Pages/Customers/Namespace2.cshtml?highlight=2"></a>]</p>
+<p>The <code>@namespace</code> directive sets the namespace for the page. The <code>@model</code> directive doesn't need to include the namespace.</p>
+<p>When the <code>@namespace</code> directive is contained in <code>_ViewImports.cshtml</code>, the specified namespace supplies the prefix for the generated namespace in the Page that imports the <code>@namespace</code> directive. The rest of the generated namespace (the suffix portion) is the dot-separated relative path between the folder containing <code>_ViewImports.cshtml</code> and the folder containing the page.</p>
+<p>For example, the <code>PageModel</code> class <code>Pages/Customers/Edit.cshtml.cs</code> explicitly sets the namespace:</p>
+<p>[!code-csharp<a href="%7E/razor-pages/index/sample/RazorPagesContacts2/Pages/Customers/Edit.cshtml.cs?name=snippet_namespace"></a>]</p>
+<p>The <code>Pages/_ViewImports.cshtml</code> file sets the following namespace:</p>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/sample/RazorPagesContacts2/Pages/_ViewImports.cshtml?highlight=1"></a>]</p>
+<p>The generated namespace for the <code>Pages/Customers/Edit.cshtml</code> Razor Page is the same as the <code>PageModel</code> class.</p>
+<p><code>@namespace</code> <em>also works with conventional Razor views.</em></p>
+<p>Consider the <code>Pages/Customers/Create.cshtml</code> view file:</p>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Create3.cshtml?highlight=2-3"></a>]</p>
+<p>The updated <code>Pages/Customers/Create.cshtml</code> view file with <code>_ViewImports.cshtml</code> and the preceding layout file:</p>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Create4.cshtml?highlight=2"></a>]</p>
+<p>In the preceding code, the <code>_ViewImports.cshtml</code> imported the namespace and Tag Helpers. The layout file imported the JavaScript files.</p>
+<p>The <a href="#rpvs17">Razor Pages starter project</a> contains the <code>Pages/_ValidationScriptsPartial.cshtml</code>, which hooks up client-side validation.</p>
+<p>For more information on partial views, see <a href="xref:mvc/views/partial">xref:mvc/views/partial</a>.</p>
+<p><a name="url_gen"></a></p>
+<h2 id="url-generation-for-pages">URL generation for Pages</h2>
+<p>The <code>Create</code> page, shown previously, uses <code>RedirectToPage</code>:</p>
+<p>[!code-csharp<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_PageModel&amp;highlight=28"></a>]</p>
+<p>The app has the following file/folder structure:</p>
+<ul>
+<li><p><em>/Pages</em></p>
+<ul>
+<li><p><code>Index.cshtml</code></p>
+</li>
+<li><p><code>Privacy.cshtml</code></p>
+</li>
+<li><p><em>/Customers</em></p>
+<ul>
+<li><code>Create.cshtml</code></li>
+<li><code>Edit.cshtml</code></li>
+<li><code>Index.cshtml</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>The <code>Pages/Customers/Create.cshtml</code> and <code>Pages/Customers/Edit.cshtml</code> pages redirect to <code>Pages/Customers/Index.cshtml</code> after success. The string <code>./Index</code> is a relative page name used to access the preceding page. It is used to generate URLs to the <code>Pages/Customers/Index.cshtml</code> page. For example:</p>
+<ul>
+<li><code>Url.Page(&quot;./Index&quot;, ...)</code></li>
+<li><code>&lt;a asp-page=&quot;./Index&quot;&gt;Customers Index Page&lt;/a&gt;</code></li>
+<li><code>RedirectToPage(&quot;./Index&quot;)</code></li>
+</ul>
+<p>The absolute page name <code>/Index</code> is used to generate URLs to the <code>Pages/Index.cshtml</code> page. For example:</p>
+<ul>
+<li><code>Url.Page(&quot;/Index&quot;, ...)</code></li>
+<li><code>&lt;a asp-page=&quot;/Index&quot;&gt;Home Index Page&lt;/a&gt;</code></li>
+<li><code>RedirectToPage(&quot;/Index&quot;)</code></li>
+</ul>
+<p>The page name is the path to the page from the root <em>/Pages</em> folder including a leading <code>/</code> (for example, <code>/Index</code>). The preceding URL generation samples offer enhanced options and functional capabilities over hard-coding a URL. URL generation uses <a href="xref:mvc/controllers/routing">routing</a> and can generate and encode parameters according to how the route is defined in the destination path.</p>
+<p>URL generation for pages supports relative names. The following table shows which Index page is selected using different <code>RedirectToPage</code> parameters in <code>Pages/Customers/Create.cshtml</code>.</p>
+<table>
+<thead>
+<tr>
+<th>RedirectToPage(x)</th>
+<th>Page</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RedirectToPage(&quot;/Index&quot;)</td>
+<td><em>Pages/Index</em></td>
+</tr>
+<tr>
+<td>RedirectToPage(&quot;./Index&quot;);</td>
+<td><em>Pages/Customers/Index</em></td>
+</tr>
+<tr>
+<td>RedirectToPage(&quot;../Index&quot;)</td>
+<td><em>Pages/Index</em></td>
+</tr>
+<tr>
+<td>RedirectToPage(&quot;Index&quot;)</td>
+<td><em>Pages/Customers/Index</em></td>
+</tr>
+</tbody>
+</table>
+<!-- Test via ~/razor-pages/index/6.0sample/RazorPagesContacts/Pages/Customers/Details.cshtml.cs -->
+<p><code>RedirectToPage(&quot;Index&quot;)</code>, <code>RedirectToPage(&quot;./Index&quot;)</code>, and <code>RedirectToPage(&quot;../Index&quot;)</code> are <em>relative names</em>. The <code>RedirectToPage</code> parameter is <em>combined</em> with the path of the current page to compute the name of the destination page.</p>
+<p>Relative name linking is useful when building sites with a complex structure. When relative names are used to link between pages in a folder:</p>
+<ul>
+<li>Renaming a folder doesn't break the relative links.</li>
+<li>Links are not broken because they don't include the folder name.</li>
+</ul>
+<p>To redirect to a page in a different <a href="xref:mvc/controllers/areas">Area</a>, specify the area:</p>
+<pre><code class="language-csharp">RedirectToPage(&quot;/Index&quot;, new { area = &quot;Services&quot; });
+</code></pre>
+<p>For more information, see <a href="xref:mvc/controllers/areas">xref:mvc/controllers/areas</a> and <a href="xref:razor-pages/razor-pages-conventions">xref:razor-pages/razor-pages-conventions</a>.</p>
+<h2 id="viewdata-attribute">ViewData attribute</h2>
+<p>Data can be passed to a page with <a href="xref:Microsoft.AspNetCore.Mvc.ViewDataAttribute">xref:Microsoft.AspNetCore.Mvc.ViewDataAttribute</a>. Properties with the <code>[ViewData]</code> attribute have their values stored and loaded from the <a href="xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary">xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary</a>.</p>
+<p>In the following example, the <code>AboutModel</code> applies the <code>[ViewData]</code> attribute to the <code>Title</code> property:</p>
+<pre><code class="language-csharp">public class AboutModel : PageModel
+{
+    [ViewData]
+    public string Title { get; } = &quot;About&quot;;
+
+    public void OnGet()
+    {
+    }
+}
+</code></pre>
+<p>In the About page, access the <code>Title</code> property as a model property:</p>
+<pre><code class="language-cshtml">&lt;h1&gt;@Model.Title&lt;/h1&gt;
+</code></pre>
+<p>In the layout, the title is read from the ViewData dictionary:</p>
+<pre><code class="language-cshtml">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;title&gt;@ViewData[&quot;Title&quot;] - WebApplication&lt;/title&gt;
+    ...
+</code></pre>
+<h2 id="tempdata">TempData</h2>
+<p>ASP.NET Core exposes the <a href="xref:Microsoft.AspNetCore.Mvc.Controller.TempData">xref:Microsoft.AspNetCore.Mvc.Controller.TempData</a>. This property stores data until it's read. The <a href="xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Keep%2A">xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Keep%2A</a> and <a href="xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Peek%2A">xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Peek%2A</a> methods can be used to examine the data without deletion. <code>TempData</code> is useful for redirection, when data is needed for more than a single request.</p>
+<p>The following code sets the value of <code>Message</code> using <code>TempData</code>:</p>
+<p>[!code-csharp<a href="%7E/razor-pages/index/sample/RazorPagesContacts2/Pages/Customers/CreateDot.cshtml.cs?highlight=10-11,25&amp;name=snippet_Temp"></a>]</p>
+<p>The following markup in the <code>Pages/Customers/Index.cshtml</code> file displays the value of <code>Message</code> using <code>TempData</code>.</p>
+<pre><code class="language-cshtml">&lt;h3&gt;Msg: @Model.Message&lt;/h3&gt;
+</code></pre>
+<p>The <code>Pages/Customers/Index.cshtml.cs</code> page model applies the <code>[TempData]</code> attribute to the <code>Message</code> property.</p>
+<pre><code class="language-csharp">[TempData]
+public string Message { get; set; }
+</code></pre>
+<p>For more information, see <a href="xref:fundamentals/app-state#tempdata">TempData</a>.</p>
+<p><a name="mhpp"></a></p>
+<h2 id="multiple-handlers-per-page">Multiple handlers per page</h2>
+<p>The following page generates markup for two handlers using the <code>asp-page-handler</code> Tag Helper:</p>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml?highlight=12-13"></a>]</p>
+<p>The form in the preceding example has two submit buttons, each using the <code>FormActionTagHelper</code> to submit to a different URL. The <code>asp-page-handler</code> attribute is a companion to <code>asp-page</code>. <code>asp-page-handler</code> generates URLs that submit to each of the handler methods defined by a page. <code>asp-page</code> isn't specified because the sample is linking to the current page.</p>
+<p>The page model:</p>
+<p>[!code-csharp<a href="%7E/razor-pages/index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml.cs?highlight=20,32"></a>]</p>
+<p>The preceding code uses <em>named handler methods</em>. Named handler methods are created by taking the text in the name after <code>On&lt;HTTP Verb&gt;</code> and before <code>Async</code> (if present). In the preceding example, the page methods are OnPost<strong>JoinList</strong>Async and OnPost<strong>JoinListUC</strong>Async. With <em>OnPost</em> and <em>Async</em> removed, the handler names are <code>JoinList</code> and <code>JoinListUC</code>.</p>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml?name=snippet_Handlers"></a>]</p>
+<p>Using the preceding code, the URL path that submits to <code>OnPostJoinListAsync</code> is <code>https://localhost:5001/Customers/CreateFATH?handler=JoinList</code>. The URL path that submits to <code>OnPostJoinListUCAsync</code> is <code>https://localhost:5001/Customers/CreateFATH?handler=JoinListUC</code>.</p>
+<h2 id="custom-routes">Custom routes</h2>
+<p>Use the <code>@page</code> directive to:</p>
+<ul>
+<li>Specify a custom route to a page. For example, the route to the About page can be set to <code>/Some/Other/Path</code> with <code>@page &quot;/Some/Other/Path&quot;</code>.</li>
+<li>Append segments to a page's default route. For example, an &quot;item&quot; segment can be added to a page's default route with <code>@page &quot;item&quot;</code>.</li>
+<li>Append parameters to a page's default route. For example, an ID parameter, <code>id</code>, can be required for a page with <code>@page &quot;{id}&quot;</code>.</li>
+</ul>
+<p>A root-relative path designated by a tilde (<code>~</code>) at the beginning of the path is supported. For example, <code>@page &quot;~/Some/Other/Path&quot;</code> is the same as <code>@page &quot;/Some/Other/Path&quot;</code>.</p>
+<p>If you don't like the query string <code>?handler=JoinList</code> in the URL, change the route to put the handler name in the path portion of the URL. The route can be customized by adding a route template enclosed in double quotes after the <code>@page</code> directive.</p>
+<p>[!code-cshtml<a href="%7E/razor-pages/index/sample/RazorPagesContacts2/Pages/Customers/CreateRoute.cshtml?highlight=1"></a>]</p>
+<p>Using the preceding code, the URL path that submits to <code>OnPostJoinListAsync</code> is <code>https://localhost:5001/Customers/CreateFATH/JoinList</code>. The URL path that submits to <code>OnPostJoinListUCAsync</code> is <code>https://localhost:5001/Customers/CreateFATH/JoinListUC</code>.</p>
+<p>The <code>?</code> following <code>handler</code> means the route parameter is optional.</p>
+<h2 id="collocation-of-javascript-js-files">Collocation of JavaScript (JS) files</h2>
+<p>[!INCLUDE<a href="%7E/includes/js-collocation.md"></a>]</p>
+<h2 id="advanced-configuration-and-settings">Advanced configuration and settings</h2>
+<p>The configuration and settings in following sections is not required by most apps.</p>
+<p>To configure advanced options, use the <a href="xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages%2A">xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages%2A</a> overload that configures <a href="xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions">xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions</a>:
+[!code-csharp<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Program.cs?name=snippet_ac&amp;highlight=5-9"></a>]</p>
+<p>Use the <a href="xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions">xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions</a> to set the root directory for pages, or add application model conventions for pages. For more information on conventions, see <a href="xref:security/authorization/razor-pages-authorization">Razor Pages authorization conventions</a>.</p>
+<p>To precompile views, see <a href="xref:mvc/views/view-compilation">Razor view compilation</a>.</p>
+<h3 id="specify-that-razor-pages-are-at-the-content-root">Specify that Razor Pages are at the content root</h3>
+<p>By default, Razor Pages are rooted in the <em>/Pages</em> directory. Add <a href="xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.WithRazorPagesAtContentRoot%2A">xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.WithRazorPagesAtContentRoot%2A</a> to specify that your Razor Pages are at the <a href="xref:fundamentals/index#content-root">content root</a> (<a href="xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath">xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath</a>) of the app:</p>
+<p>[!code-csharp<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Program.cs?name=snippet_cr&amp;highlight=5-9"></a>]</p>
+<h3 id="specify-that-razor-pages-are-at-a-custom-root-directory">Specify that Razor Pages are at a custom root directory</h3>
+<p>Add <a href="xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuilderExtensions.WithRazorPagesRoot%2A">xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuilderExtensions.WithRazorPagesRoot%2A</a> to specify that Razor Pages are at a custom root directory in the app (provide a relative path):</p>
+<p>[!code-csharp<a href="%7E/razor-pages/index/6.0sample/RazorPagesContacts/Program.cs?name=snippet_crd&amp;highlight=5-9"></a>]</p>
+<h2 id="additional-resources">Additional resources</h2>
+<ul>
+<li>See <a href="xref:tutorials/razor-pages/razor-pages-start">Get started with Razor Pages</a>, which builds on this introduction.</li>
+<li><a href="xref:security/authorization/simple#aarp">Authorize attribute and Razor Pages</a></li>
+<li><a href="https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/razor-pages/index/6.0sample">Download or view sample code</a></li>
+<li><a href="xref:index">xref:index</a></li>
+<li><a href="xref:mvc/views/razor">xref:mvc/views/razor</a></li>
+<li><a href="xref:mvc/controllers/areas">xref:mvc/controllers/areas</a></li>
+<li><a href="xref:tutorials/razor-pages/razor-pages-start">xref:tutorials/razor-pages/razor-pages-start</a></li>
+<li><a href="xref:security/authorization/razor-pages-authorization">xref:security/authorization/razor-pages-authorization</a></li>
+<li><a href="xref:razor-pages/razor-pages-conventions">xref:razor-pages/razor-pages-conventions</a></li>
+<li><a href="xref:test/razor-pages-tests">xref:test/razor-pages-tests</a></li>
+<li><a href="xref:mvc/views/partial">xref:mvc/views/partial</a></li>
+</ul>
+<div class="moniker-end"><p>[!INCLUDE<a href="%7E/razor-pages/index/includes/index35.md"></a>]</p>
+</div>
+</div>
